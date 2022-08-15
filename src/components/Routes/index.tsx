@@ -5,7 +5,6 @@ import WeatherWidget from "../WeatherWidget";
 function Routes() {
   return (
     <Switch>
-      <Route path='/' element={<WeatherWidget />} />
       <Route path='/weather-widget' element={<WeatherWidget />} />
 
       <Route path='*' element={<div>Нет Такого Виджета</div>} />
