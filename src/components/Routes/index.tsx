@@ -1,13 +1,34 @@
 import React from "react";
-import { Routes as Switch, Route } from "react-router-dom";
-import WeatherWidget from "../WeatherWidget";
+import { Routes as Switch, Route, Navigate } from "react-router-dom";
+import DataList from "../DataList";
+import EditUser from "../EditUser";
+import { LoginPage } from "../LoginPage";
+import PrivateRoute from "../PrivateRoute";
+import SingUpPage from "../SingUpPage";
 
 function Routes() {
   return (
     <Switch>
-      <Route path='/weather-widget' element={<WeatherWidget />} />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='/sing-up' element={<SingUpPage />} />
+      <Route
+        path='/data-list'
+        element={
+          <PrivateRoute>
+            <DataList />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path='/edit-user'
+        element={
+          <PrivateRoute>
+            <EditUser />
+          </PrivateRoute>
+        }
+      />
 
-      <Route path='*' element={<div>Нет Такого Виджета</div>} />
+      <Route path='*' element={<Navigate to={"/login"} />} />
     </Switch>
   );
 }
