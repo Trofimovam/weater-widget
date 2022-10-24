@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ContainerForm, Button, StyledInput } from "./styled";
 import { Field, Form } from "react-final-form";
 import { NavLink } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
+import { LoginRequest } from "../../types/types";
 
 export default function LoginForm() {
-  const onSubmit = () => {};
+  const login = useLogin();
+
+  const handleLoginClick = useCallback(
+    async (data: LoginRequest) => {
+      await login(data);
+    },
+    [login],
+  );
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={handleLoginClick}
       render={({ handleSubmit }) => (
         <ContainerForm onSubmit={handleSubmit}>
           <Field
-            name='eMail'
+            name='email'
             render={({ input }) => (
               <StyledInput {...input} placeholder='Электронная почта' />
             )}

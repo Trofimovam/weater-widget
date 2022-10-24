@@ -1,7 +1,7 @@
 import { StyledButton } from "src/components/YellowButton/styled";
 import styled from "styled-components";
 
-export const ContainerForm = styled.form`
+export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   padding: 48px;
@@ -19,7 +19,34 @@ export const StyledInput = styled.input`
   box-sizing: border-box;
   padding: 12px;
   margin: 6px 0;
+  color: #6879bb;
   width: 50%;
+
+  &:hover {
+    background: #ffffff;
+    border: 1px solid #415fd5;
+    border-radius: 4px;
+    color: #415fd5;
+  }
+  &:focus,
+  :active {
+    background: #ffffff;
+    border: 1px solid #415fd5;
+    border-radius: 4px;
+    color: #415fd5;
+  }
+  &:focus-visible {
+    background: #ffffff;
+    border: 1px solid #415fd5;
+    border-radius: 4px;
+    color: #415fd5;
+    outline-color: unset;
+  }
+  &.error {
+    background: #ffffff;
+    border: 1px solid #ee4141;
+    border-radius: 4px;
+  }
 `;
 
 export const Title = styled.span`

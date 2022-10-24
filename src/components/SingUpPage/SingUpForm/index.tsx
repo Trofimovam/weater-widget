@@ -7,19 +7,23 @@ import {
   LaberError,
 } from "./styled";
 import { Field, Form } from "react-final-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PUT_SING_UP } from "../../../helpers/mutation";
 import { useMutation } from "@apollo/client";
 import { omit } from "lodash/omit";
+import { UserRequest } from "../../types/types";
 const required = (value) => (value ? false : true);
 
 export default function SingUpForm() {
   const [isErrorPassword, setErrorPassword] = useState(false);
-  const [singUp] = useMutation(PUT_SING_UP);
+  const navigate = useNavigate();
+  const [singUp] = useMutation<{ token: string }, UserRequest>(PUT_SING_UP);
+
   const onSubmit = (data) => {
-    if (data.password === data.confirmationPassword)
+    if (data.password === data.confirmationPassword) {
       singUp(omit(data, "confirmationPassword"));
-    else {
+      navigate("/");
+    } else {
       setErrorPassword(true);
     }
   };

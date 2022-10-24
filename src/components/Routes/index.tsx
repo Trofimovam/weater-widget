@@ -4,32 +4,35 @@ import DataList from "../DataList";
 import EditUser from "../EditUser";
 import { LoginPage } from "../LoginPage";
 import PrivateRoute from "../PrivateRoute";
+import CurrentUserProvider from "../providers/CurrentUserProvider";
 import SingUpPage from "../SingUpPage";
 
 function Routes() {
   return (
-    <Switch>
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/sing-up' element={<SingUpPage />} />
-      <Route
-        path='/data-list'
-        element={
-          <PrivateRoute>
-            <DataList />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path='/edit-user'
-        element={
-          <PrivateRoute>
-            <EditUser />
-          </PrivateRoute>
-        }
-      />
+    <CurrentUserProvider>
+      <Switch>
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/sing-up' element={<SingUpPage />} />
+        <Route
+          path='/data-list'
+          element={
+            <PrivateRoute>
+              <DataList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/edit-user'
+          element={
+            <PrivateRoute>
+              <EditUser />
+            </PrivateRoute>
+          }
+        />
 
-      <Route path='*' element={<Navigate to={"/login"} />} />
-    </Switch>
+        <Route path='*' element={<Navigate to={"/login"} />} />
+      </Switch>
+    </CurrentUserProvider>
   );
 }
 
